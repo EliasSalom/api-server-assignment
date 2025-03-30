@@ -9,11 +9,11 @@ export class ProductController {
 
   @Get(':id')
   getProducts(@Param('id') id: string) {
-    console.log(id);
+    return this.productService.getProducts(id);
   }
 
-  @Get('Categories/:id')
-  getCategories(@Param('id') id: string) {
-    console.log(id);
+  @Get('categories')
+  getCategories() {
+    return this.productService.getAllCategories();
   }
 }

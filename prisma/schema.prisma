@@ -3,20 +3,31 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  cart      Cart?    @relation(fields: [cartId], references: [id])
+  cartId    String?  @db.ObjectId
+}
+
 model Cart {
-  id        String     @id @default(uuid())
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
   userId    String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   items     CartItem[]
+  User      User[]
 }
 
 model Category {
-  id        String    @id @default(uuid())
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -24,9 +35,9 @@ model Category {
 }
 
 model CartItem {
-  id        String   @id @default(uuid())
-  cartId    String
-  productId String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  cartId    String   @db.ObjectId
+  productId String   @db.ObjectId
   quantity  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -36,11 +47,11 @@ model CartItem {
 }
 
 model Product {
-  id          String   @id @default(uuid())
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
   price       Float
-  categoryId  String
+  categoryId  String   @db.ObjectId
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

@@ -4,9 +4,9 @@ import { AppService } from './app.service';
 import { ProductModule } from './product/prodact.module';
 import { CartModule } from './cart/cart.module';
 import { AppDao } from './app.dao';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { PrismaClient } from '@prisma/client';
 
 @Module({
   imports: [
@@ -20,9 +20,8 @@ import { JwtModule } from '@nestjs/jwt';
     }),
     ProductModule,
     CartModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/mydatabase', {}),
   ],
   controllers: [AppController],
-  providers: [AppService, AppDao],
+  providers: [AppService, AppDao, PrismaClient],
 })
 export class AppModule {}
