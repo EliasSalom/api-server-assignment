@@ -7,7 +7,9 @@ import { ApiTags } from '@nestjs/swagger';
 export class CartController {
   constructor(private readonly cartService: CartService) {}
   @Post()
-  addProductToCart() {}
+  addProductToCart() {
+    console.log('addProductToCart');
+  }
 
   @Patch(':id')
   changeProductAmountInCart(@Param('id') id: string) {

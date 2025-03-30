@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Cart {
-  id        String     @id @default(cuid())
+  id        String     @id @default(uuid())
   userId    String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -16,7 +16,7 @@ model Cart {
 }
 
 model Category {
-  id        String    @id @default(cuid())
+  id        String    @id @default(uuid())
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -24,7 +24,7 @@ model Category {
 }
 
 model CartItem {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   cartId    String
   productId String
   quantity  Int
@@ -36,7 +36,7 @@ model CartItem {
 }
 
 model Product {
-  id          String   @id @default(cuid())
+  id          String   @id @default(uuid())
   name        String
   description String
   price       Float

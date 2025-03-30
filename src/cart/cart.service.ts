@@ -1,26 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCartDto } from './dto/create-cart.dto';
-import { UpdateCartDto } from './dto/update-cart.dto';
+import { CartDao } from './cart.dao';
+import { IAddToCart } from './type/cart';
 
 @Injectable()
 export class CartService {
-  create(createCartDto: CreateCartDto) {
-    return 'This action adds a new cart';
+  constructor(private readonly cartDao: CartDao) {}
+  addProduct(productId: string, userId: string) {
+    return this.cartDao.addProductToCart(productId, userId);
   }
-
-  findAll() {
-    return `This action returns all cart`;
+  changeProduct(data: IAddToCart) {
+    return this.cartDao.changeProductAmountInCart(data);
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} cart`;
-  }
-
-  update(id: number, updateCartDto: UpdateCartDto) {
-    return `This action updates a #${id} cart`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} cart`;
+  deleteProduct(cartId: string) {
+    return this.cartDao.deleteProductFromCart(cartId);
   }
 }
