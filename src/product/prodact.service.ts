@@ -3,9 +3,9 @@ import { CreateProdactDto } from './dto/create-prodact.dto';
 import { UpdateProdactDto } from './dto/update-prodact.dto';
 
 @Injectable()
-export class ProdactService {
+export class ProductService {
   create(createProdactDto: CreateProdactDto) {
-    return 'This action adds a new prodact';
+    return 'This action adds a new product';
   }
 
   findAll() {
