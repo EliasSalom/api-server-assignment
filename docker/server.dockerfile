@@ -5,7 +5,12 @@ COPY /package*.json ./
 COPY ./ ./
 
 ARG PORT=3000
+ARG JWT_SECRET="test"
+ARG DATABASE_URL="mongodb+srv://test:123@cluster0.id10m.mongodb.net/test"
+
 ENV PORT=$PORT
+ENV JWT_SECRET=$JWT_SECRET
+ENV DATABASE_URL=$DATABASE_URL
 
 RUN npm install
 RUN npm install --save-dev @types/node
