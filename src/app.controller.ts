@@ -9,10 +9,16 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('login')
-  logic(@Body() data: Login) {}
+  logic(@Body() data: Login) {
+    const { email, password } = data;
+    return this.appService.login(email, password);
+  }
 
   @Post('sign-up')
-  signUp(@Body() data: SignUp) {}
+  signUp(@Body() data: SignUp) {
+    const { email, password } = data;
+    return this.appService.signUp(email, password);
+  }
 
   @Post('check-token')
   checkToken() {}

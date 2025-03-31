@@ -13,10 +13,6 @@ export class Login {
 
 export class SignUp {
   @ApiProperty()
-  @IsString()
-  fullName: string;
-
-  @ApiProperty()
   @IsEmail()
   email: string;
 

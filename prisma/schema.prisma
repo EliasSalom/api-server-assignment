@@ -51,7 +51,7 @@ model Product {
   name        String
   description String
   price       Float
-  categoryId  String   @db.ObjectId
+  categoryId  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
