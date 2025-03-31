@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { ICreateProduct } from './type/product.type';
 
 @Injectable()
 export class ProductDao {
@@ -21,14 +22,9 @@ export class ProductDao {
       },
     });
   }
-  createProduct(name: string, categoryId: string) {
+  createProduct(data: ICreateProduct) {
     return this.prismaClient.product.create({
-      data: {
-        name,
-        description: '',
-        categoryId,
-        price: 0,
-      },
+      data,
     });
   }
 }

@@ -5,11 +5,11 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { AppDao } from './app.dao';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(private readonly appDao: AppDao) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     try {
@@ -19,9 +19,7 @@ export class JwtAuthGuard implements CanActivate {
         throw new UnauthorizedException('Please provide token');
       }
       const authToken = authorization.replace(/bearer/gim, '').trim();
-      request.decodedData = this.jwtService.verify(authToken, {
-        secret: process.env.JWT_SECRET,
-      });
+      request.decodedData = this.appDao.validateToken(authToken);
       return true;
     } catch (error) {
       console.log('auth error - ', error.message);

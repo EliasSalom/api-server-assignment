@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProductDao } from './product.dao';
+import { CreateProductDto } from './dto/create-prodact.dto';
 
 @Injectable()
 export class ProductService {
@@ -12,5 +13,8 @@ export class ProductService {
   }
   createCategory(name: string) {
     return this.productDao.createCategory(name);
+  }
+  createProduct(data: CreateProductDto) {
+    return this.productDao.createProduct(data);
   }
 }
