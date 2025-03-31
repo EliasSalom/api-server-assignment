@@ -12,9 +12,20 @@ to run the project you need to have the following installed:
 ### endpoints
 >localhost:3000
 
-| Method | Endpoint | params |
-|:------:|:--------:|:------:|
-|        |   301    |  283   |
+| Method | Endpoint            | Description                      | params |
+|:-------|:--------------------|----------------------------------|:------:|
+| GET    | /                   | Health check                     |  283   |
+| POST   | /login              | login                            |        |
+| POST   | /signup             | signup                           |        |
+|        |                     |                                  |        |
+| POST   | /cart               | add Product To Cart              |        |
+| PATCH  | /cart/{id}          | change Product Amount            |        |
+| DELETE | /cart/{id}          | delete Product From Cart         |        |
+|        |                     |                                  |        |
+| GET    | /product/{id}       | get all product base on category |        |
+| GET    | /product/categories | get all categories               |        |
+| POST   | /product/categories | create new categories            |        |
+| POST   | /product            | create new product               |        |
 
 
 ```bash

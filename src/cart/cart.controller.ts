@@ -18,6 +18,7 @@ import { JwtAuthGuard } from '../jwt-auth.guard';
 @UseGuards(JwtAuthGuard)
 export class CartController {
   constructor(private readonly cartService: CartService) {}
+
   @Post()
   addProductToCart(@Body() data: CreateCartDto) {
     const { productId, userId } = data;
