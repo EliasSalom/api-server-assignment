@@ -26,7 +26,7 @@ export class ProductController {
     return this.productService.createCategory(name);
   }
 
-  @Post('product')
+  @Post()
   createProduct(@Body() data: CreateProductDto) {
     return this.productService.createProduct(data);
   }
