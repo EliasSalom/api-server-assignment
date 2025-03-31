@@ -25,7 +25,7 @@ export class CartController {
     return this.cartService.addProduct(productId, userId);
   }
 
-  @Patch(':id')
+  @Patch()
   changeProductAmountInCart(@Body() data: UpdateCartDto) {
     return this.cartService.changeProductAmount(data);
   }

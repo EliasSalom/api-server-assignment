@@ -6,7 +6,6 @@ import { ICreateProduct } from './type/product.type';
 export class ProductDao {
   constructor(private readonly prismaClient: PrismaClient) {}
   getCategories() {
-    console.log('getCategories');
     return this.prismaClient.category.findMany();
   }
 

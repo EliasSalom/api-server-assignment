@@ -10,14 +10,15 @@ import { CreateCategoryDto, CreateProductDto } from './dto/create-prodact.dto';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @Get(':id')
-  getProducts(@Param('id') id: string) {
-    return this.productService.getProducts(id);
-  }
-
-  @Get('categories')
+  @Get('/categories')
   getCategories() {
     return this.productService.getAllCategories();
+  }
+
+  @Get(':id')
+  getProducts(@Param('id') id: string) {
+    console.log('getCategories');
+    return this.productService.getProducts(id);
   }
 
   @Post('categories')
