@@ -10,11 +10,17 @@ export class AppDao {
     private readonly jwtService: JwtService,
   ) {}
   signUp(email: string, password: string) {
-    return this.prismaClient.user.create({
-      data: {
-        email,
-        password: bcrypt.hashSync(password, 10),
-      },
+    return this.prismaClient.$transaction(async (tx) => {
+      const user = await tx.user.findUnique({ where: { email } });
+      if (user) {
+        throw new UnauthorizedException('User already exists');
+      }
+      return tx.user.create({
+        data: {
+          email,
+          password: bcrypt.hashSync(password, 10),
+        },
+      });
     });
   }
   async findUserByEmail(email: string) {
@@ -28,13 +34,17 @@ export class AppDao {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    return { id: user.id, username: user.email };
+    return { email: user.email, id: user.id };
   }
 
   async login(username: string, password: string) {
     const user = await this.validateUser(username, password);
-    const payload = { sub: user.id, username: user.username };
-    const token = this.jwtService.sign(payload);
+    const token = this.jwtService.sign(user);
     return { accessToken: token };
+  }
+  validateToken(token: string) {
+    return this.jwtService.verify(token, {
+      secret: process.env.JWT_SECRET,
+    });
   }
 }

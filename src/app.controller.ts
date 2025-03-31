@@ -14,7 +14,7 @@ export class AppController {
     return this.appService.login(email, password);
   }
 
-  @Post('sign-up')
+  @Post('signup')
   signUp(@Body() data: SignUp) {
     const { email, password } = data;
     return this.appService.signUp(email, password);
