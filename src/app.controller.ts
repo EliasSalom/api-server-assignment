@@ -20,9 +20,6 @@ export class AppController {
     return this.appService.signUp(email, password);
   }
 
-  @Post('check-token')
-  checkToken() {}
-
   @Get()
   healthCheck() {
     return 'Server is running';

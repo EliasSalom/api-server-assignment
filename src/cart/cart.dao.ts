@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { IAddToCart } from './type/cart';
+import { UpdateCartDto } from './dto/update-cart.dto';
 
 @Injectable()
 export class CartDao {
@@ -25,21 +25,22 @@ export class CartDao {
       });
     });
   }
-  changeProductAmountInCart(data: IAddToCart) {
-    const { cartId, action, amount, userId } = data;
+  changeProductAmountInCart(data: UpdateCartDto) {
+    const { id, action, amount } = data;
     return this.prismaClient.$transaction(async (tx) => {
       const cartItem = await tx.cartItem.findUnique({
-        where: { id: cartId },
+        where: { id },
       });
-
-      return tx.cartItem.update({
-        where: { id: cartItem?.id },
-        data: {
-          quantity: {
-            [action === 'increment' ? 'increment' : 'decrement']: amount,
+      if (cartItem) {
+        return tx.cartItem.update({
+          where: { id: cartItem?.id },
+          data: {
+            quantity: {
+              [action === 'increment' ? 'increment' : 'decrement']: amount,
+            },
           },
-        },
-      });
+        });
+      } else throw new UnauthorizedException('item not found');
     });
   }
   deleteProductFromCart(cartId: string) {

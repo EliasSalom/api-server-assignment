@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/swagger';
-import { CreateProdactDto } from './create-prodact.dto';
+import { CreateProductDto } from './create-prodact.dto';
 
-export class UpdateProdactDto extends PartialType(CreateProdactDto) {}
+export class UpdateProductDto extends PartialType(CreateProductDto) {}
