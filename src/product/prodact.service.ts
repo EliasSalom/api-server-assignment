@@ -10,4 +10,7 @@ export class ProductService {
   getProducts(id: string) {
     return this.productDao.getProducts(id);
   }
+  createCategory(name: string) {
+    return this.productDao.createCategory(name);
+  }
 }

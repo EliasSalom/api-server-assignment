@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { ProductService } from './prodact.service';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -15,5 +15,10 @@ export class ProductController {
   @Get('categories')
   getCategories() {
     return this.productService.getAllCategories();
+  }
+
+  @Post('categories')
+  createCategory(name: string) {
+    return this.productService.createCategory(name);
   }
 }

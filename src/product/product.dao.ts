@@ -14,4 +14,21 @@ export class ProductDao {
       },
     });
   }
+  createCategory(name: string) {
+    return this.prismaClient.category.create({
+      data: {
+        name,
+      },
+    });
+  }
+  createProduct(name: string, categoryId: string) {
+    return this.prismaClient.product.create({
+      data: {
+        name,
+        description: '',
+        categoryId,
+        price: 0,
+      },
+    });
+  }
 }
