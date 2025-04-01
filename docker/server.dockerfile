@@ -6,7 +6,7 @@ COPY ./ ./
 
 ARG PORT=3000
 ARG JWT_SECRET="test"
-ARG DATABASE_URL="mongodb+srv://test:123@cluster0.id10m.mongodb.net/test"
+ARG DATABASE_URL="change-me"
 
 ENV PORT=$PORT
 ENV JWT_SECRET=$JWT_SECRET
